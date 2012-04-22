@@ -1,0 +1,6 @@
+start =
+    word
+
+word = 
+    small: [a-z]+ {return small.join("");}
+  / caps: [A-Z]+  {return caps.join("");}

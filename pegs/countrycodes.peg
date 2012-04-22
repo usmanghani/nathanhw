@@ -1,0 +1,7 @@
+start =
+    countrycode
+
+letter = [a-z]
+
+countrycode =
+	first:letter second:letter { return first+second; }

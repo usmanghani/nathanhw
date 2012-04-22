@@ -1,0 +1,22 @@
+/*
+	Scheem is an intentional name not a misspelling. Its a variant of scheme. 
+*/
+
+start =
+    expression
+
+expression = 
+    atom
+    / "(" a:atom sa:spacedatom* ")" { return [a].concat(sa); }
+
+spacedatom = 
+    ' '* w:atom ' '* { return w; }
+    / x:expression { return x; }
+    
+
+atom =
+    chars:validchar+
+        { return chars.join(""); }
+        
+validchar
+    = [0-9a-zA-Z_?!+-=@#$%^&*/.]

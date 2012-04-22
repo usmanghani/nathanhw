@@ -1,0 +1,12 @@
+start =
+    wordlist
+
+wordlist
+        = w:word list:spacedword* { return [w].concat(list); }
+
+    
+spacedword
+	= ' '+ w:word { return w; }
+    
+word
+	= letters:[a-z]+ { return letters.join(''); }
