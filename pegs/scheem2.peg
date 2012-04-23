@@ -1,0 +1,39 @@
+
+/*
+	Scheem is an intentional name not a misspelling. Its a variant of scheme. 
+*/
+
+start =
+    expressionlist
+
+expressionlist = 
+	whitespace list:expression* whitespace { return list; }
+
+expression = 
+     comments { return ; }
+     / atom 
+    / whitespace "(" whitespace a:atom whitespace sa:spacedatom* whitespace ")" whitespace { return [a].concat(sa); }
+
+
+spacedatom = 
+    whitespace w:atom whitespace { return w; }
+    / x:expression { return x; }
+
+space = [ \t\n\r] { return ; }
+
+whitespace = 
+	space* { return ; }
+
+
+comments = whitespace ';;' whitespace w:word list:spacedword* { return ; }
+
+spacedword = space+ w:word { return ; }
+
+word = letters:validchar+ { return ; }
+
+atom =
+    chars:validchar+
+        { return chars.join(""); }
+        
+validchar
+    = [0-9a-zA-Z_?!+-=@#$%^&*/.\\]
